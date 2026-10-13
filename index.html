@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Impact</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="gameArea">
+
+        <div id="menu">
+            <div class="spaceParticles"></div>
+
+            <img id="gameTitle" src="Sprites/tittle.png" alt="Space Impact">
+
+            <div id="menuButtons">
+                <img id="playBtn" class="menuButton" src="Sprites/Botoes/StartGame.png" alt="Start Game">
+                <img id="leaderboardBtn" class="menuButton" src="Sprites/Botoes/Leaderboard.png" alt="Leaderboard">
+                <img id="achievementsBtn" class="menuButton" src="Sprites/Botoes/Achievements.png" alt="Achievements">
+            </div>
+
+            <button id="soundBtn">🔇</button>
+        </div>
+
+        <div id="leaderboardScreen" class="subScreen">
+            <div class="spaceParticles"></div>
+
+            <img class="screenTitle" src="Sprites/tittle.png" alt="Space Impact">
+            <img class="backBtn" src="Sprites/Botoes/Seta.png" alt="Voltar">
+
+            <div class="screenContent">
+                <h1>Leaderboard</h1>
+            </div>
+        </div>
+
+        <div id="achievementsScreen" class="subScreen">
+            <div class="spaceParticles"></div>
+
+            <img class="screenTitle" src="Sprites/tittle.png" alt="Space Impact">
+            <img class="backBtn" src="Sprites/Botoes/Seta.png" alt="Voltar">
+
+            <div class="screenContent">
+                <h1>Achievements</h1>
+            </div>
+        </div>
+
+        <div id="ui">
+            <div id="hearts"></div>
+            <div id="powerUpIndicator"></div>
+            <div id="score">0</div>
+            <div id="bossHp"></div>
+        </div>
+
+        <img id="ship" src="Sprites/ship_green.png" alt="ship">
+
+        <!-- CENÁRIO DO NÍVEL 2 -->
+        <div id="cloudLayer"></div>
+
+        <!-- CENÁRIO DO NÍVEL 3 -->
+        <div id="mountainLayer"></div>
+
+        <div id="sceneryLayer"></div>
+
+        <div id="roofingLayer"></div>
+        
+        <div id="pauseScreen" class="subScreen" style="display: none;">
+            <div class="spaceParticles"></div>
+            
+            <h1 class="pauseTitle">PAUSED</h1>
+            
+            <div class="pauseButtons">
+                <button id="resumeBtn" class="pauseBtn">CONTINUAR</button>
+                <button id="restartBtn" class="pauseBtn">REINICIAR</button>
+                <button id="backMenuBtn" class="pauseBtn">MENU INICIAL</button>
+            </div>
+        </div>
+
+        <div id="endScreen">
+            <div class="stars" id="endScreenStars"></div>
+
+            <div id="endTitle" class="title">GAME OVER</div>
+
+            <div class="panel">
+                <div class="score-row">
+                    <span class="label">SCORE</span>
+                    <span id="statScore" class="value">00000</span>
+                </div>
+
+                <div class="sub-section">
+                    <div class="stat-row"><span>ENEMIES</span><span id="statEnemies" class="value">00000</span></div>
+                    <div class="stat-row"><span>BOSSES</span> <span id="statBosses" class="value">00000</span></div>
+                </div>
+
+                <div class="sub-section" style="border-bottom:none; margin-bottom:0;">
+                    <div class="stat-row"><span>ENEMIES DESTROYED</span><span id="statDestroyed" class="value">000</span></div>
+                    <div class="stat-row"><span>ENEMIES PROJECTILES DESTROYED</span><span id="statProjDestroyed" class="value">000</span></div>
+                    <div class="stat-row"><span>POWER UP COLLECTED</span><span id="statPowerUps" class="value">000</span></div>
+                    <div class="stat-row"><span>LIVES LOST</span><span id="statLivesLost" class="value">000</span></div>
+                </div>
+
+                <div class="quit-wrapper">
+                    <button id="playAgainBtn" class="quit-btn">QUIT</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
