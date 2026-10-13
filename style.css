@@ -1,0 +1,836 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bgZoom: 1;
+    --nokia-green: #a7ff00; 
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    font-family: Arial, sans-serif;
+}
+
+#gameArea {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: #000;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+/* ========================= */
+/* MENU PRINCIPAL */
+/* ========================= */
+
+#menu {
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+    background: #000;
+}
+
+/* ========================= */
+/* PARTÍCULAS DE FUNDO */
+/* ========================= */
+
+.spaceParticles {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.spaceParticle {
+    position: absolute;
+
+    width: 14px;
+    height: 14px;
+
+    background: #a7ff00;
+    box-shadow: 0 0 8px #a7ff00;
+
+    image-rendering: pixelated;
+
+    animation-name: particleMove;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes particleMove {
+    from {
+        transform: translateX(120vw);
+    }
+    to {
+        transform: translateX(-20vw);
+    }
+}
+
+/* ========================= */
+/* TÍTULOS DOS MENUS */
+/* ========================= */
+
+#gameTitle {
+    position: relative;
+    z-index: 2;
+
+    width: 55vw;
+    max-width: 950px;
+    min-width: 320px;
+
+    height: auto;
+    margin-top: 70px;
+
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+.screenTitle {
+    position: relative;
+    z-index: 2;
+
+    width: 55vw;
+    max-width: 950px;
+    min-width: 320px;
+
+    height: auto;
+    margin-top: 70px;
+
+    image-rendering: pixelated;
+    pointer-events: none;
+}
+
+/* ========================= */
+/* BOTÕES DO MENU PRINCIPAL */
+/* ========================= */
+
+#menuButtons {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+
+    margin-top: 35px;
+}
+
+.menuButton {
+    width: 360px;
+    height: auto;
+
+    cursor: pointer;
+    image-rendering: pixelated;
+
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.menuButton:hover {
+    transform: scale(1.08);
+    filter: brightness(1.25);
+}
+
+/* ========================= */
+/* BOTÃO DE CONTROLE DE SOM */
+/* ========================= */
+
+#soundBtn {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+
+    width: 60px;
+    height: 60px;
+    z-index: 4;
+
+    font-size: 28px;
+    cursor: pointer;
+
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+
+    border: 2px solid white;
+    border-radius: 12px;
+
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+#soundBtn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.25);
+}
+
+/* ========================= */
+/* TELAS SECUNDÁRIAS */
+/* ========================= */
+
+.subScreen {
+    position: absolute;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+    z-index: 25;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+    background: #000;
+}
+
+.backBtn {
+    position: absolute;
+
+    top: max(20px, calc((100vh * (1 - var(--bgZoom))) / 2 + 20px));
+    left: max(20px, calc((100vw * (1 - var(--bgZoom))) / 2 + 20px));
+
+    width: 70px;
+    height: auto;
+    z-index: 3;
+
+    cursor: pointer;
+    image-rendering: pixelated;
+
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.backBtn:hover {
+    transform: scale(1.1);
+    filter: brightness(1.25);
+}
+
+.screenContent {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 40px;
+    text-shadow: 3px 3px 0 #000;
+
+    margin-top: 40px;
+}
+
+/* ========================= */
+/* INTERFACE DO JOGO (HUD) */
+/* ========================= */
+
+#ui {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 53px;
+
+    background: #e4e4e4;
+    border-bottom: 3px solid #ff001a;
+
+    z-index: 10;
+
+    display: none;
+    align-items: center;
+}
+
+#hearts {
+    display: flex;
+    gap: 10px;
+    margin-left: 40px;
+}
+
+#powerUpIndicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: transparent;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+    z-index: 12;
+}
+
+.pickup {
+    position: absolute;
+    z-index: 5;
+    image-rendering: pixelated;
+}
+
+.heart {
+    width: 40px;
+    height: 40px;
+}
+
+#score {
+    font-size: 38px;
+    color: #000;
+    margin-left: 100px;
+}
+
+#bossHp {
+    font-size: 32px;
+    color: #be646c;
+    margin-left: 500px;
+}
+
+/* ========================= */
+/* ENTIDADES DO MAPA */
+/* ========================= */
+
+#ship {
+    position: absolute;
+
+    width: 46px;
+    height: 31px;
+
+    left: 10px;
+    top: 200px;
+
+    z-index: 5;
+
+    display: none;
+    image-rendering: pixelated;
+}
+
+.bullet, .enemyBullet {
+    position: absolute;
+    width: 15px;
+    height: 5px;
+    z-index: 4;
+}
+
+.enemy {
+    position: absolute;
+    width: 46px;
+    height: 23px;
+    z-index: 4;
+    image-rendering: pixelated;
+}
+
+.missile, .enemyMissile {
+    position: absolute;
+    z-index: 5;
+    image-rendering: pixelated;
+}
+
+.lifePickup {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    z-index: 5;
+    image-rendering: pixelated;
+}
+
+.boss {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    z-index: 6;
+    image-rendering: pixelated;
+}
+
+.bossLaser {
+    position: absolute;
+    left: 0;
+    height: 50px;
+    background: #4ad2ff;
+    z-index: 3;
+}
+
+.bossLaser::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 100%;
+    height: 30px;
+    background: #fffcf9;
+}
+
+.boss2Bullet {
+    background: #293028;
+    box-shadow: 0 0 8px #293028;
+}
+
+.boss3Bullet {
+    background: #293028;
+    box-shadow: 0 0 8px #293028;
+}
+
+.miniBoss {
+    position: absolute;
+
+    width: 35px;
+    height: 40px;
+
+    z-index: 6;
+    image-rendering: pixelated;
+}
+
+.miniBossBullet {
+    background: #000;
+    box-shadow: 0 0 8px #000;
+}
+
+/* ========================= */
+/* NUVENS DO NÍVEL 2 */
+/* ========================= */
+
+#cloudLayer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 70px;
+
+    z-index: 2;
+    display: none;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.cloudTrack {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: flex-end;
+
+    height: 70px;
+
+    animation-name: cloudsMove;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.cloudTrack img {
+    height: 60px;
+    width: auto;
+
+    image-rendering: pixelated;
+    flex-shrink: 0;
+}
+
+@keyframes cloudsMove {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ========================= */
+/* MONTANHAS DO NÍVEL 3 */
+/* ========================= */
+
+#mountainLayer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 150px;
+
+    z-index: 2;
+    display: none;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.mountainTrack {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: flex-end;
+
+    height: 150px;
+
+    animation-name: mountainsMove;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.mountainTrack img {
+    height: 60px;
+    width: auto;
+
+    image-rendering: pixelated;
+    flex-shrink: 0;
+}
+
+@keyframes mountainsMove {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ========================= */
+/* TELHADOS DOS NÍVEIS 5 E 6 */
+/* ========================= */
+
+#roofingLayer {
+    position: absolute;
+    left: 0;
+    top: 53px;
+    bottom: auto;
+
+    display: flex;
+    align-items: flex-start;
+
+    height: 150px;
+    z-index: 1;
+
+    animation-name: sceneryMove;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.roofingTrack {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: auto;
+
+    display: flex;
+    align-items: flex-start;
+
+    height: 150px;
+
+    animation-name: sceneryMove;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* ========================= */
+/*     SKYLINE DO NÍVEL 4    */
+/* ========================= */
+
+#sceneryLayer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: flex-end;
+
+    height: 150px;
+
+    animation-name: sceneryMove;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.sceneryTrack {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: flex-end;
+
+    height: 150px;
+
+    animation-name: sceneryMove;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.sceneryTrack img {
+    height: 60px;
+    width: auto;
+
+    image-rendering: pixelated;
+    flex-shrink: 0;
+}
+
+@keyframes sceneryMove {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ==========================================================================
+   TELA DE PAUSA 
+   ========================================================================== */
+#pauseScreen {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.88);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.pauseTitle {
+    font-family: 'Press Start 2P', 'Courier New', Courier, monospace;
+    font-size: 42px;
+    color: var(--nokia-green);
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    text-shadow: 0 0 15px rgba(167, 255, 0, 0.7), 3px 3px 0px #000000;
+    text-align: center;
+}
+
+.pauseButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 320px;
+}
+
+.pauseBtn {
+    font-family: 'Press Start 2P', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--nokia-green);
+    background-color: #000000;
+    border: 3px solid var(--nokia-green);
+    border-radius: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0px 4px 0px #1a3300, 0 0 8px rgba(167, 255, 0, 0.2);
+}
+
+.pauseBtn:hover {
+    background-color: var(--nokia-green);
+    color: #000000;
+    box-shadow: 0px 4px 0px #1a3300, 0 0 20px rgba(167, 255, 0, 0.6);
+    transform: scale(1.03);
+}
+
+.pauseBtn:active {
+    transform: scale(0.98);
+    box-shadow: 0px 1px 0px #1a3300;
+}
+
+#pauseScreen.subScreen {
+    pointer-events: auto !important;
+}
+
+/* ==========================================================================
+   TELA FINAL 
+   ========================================================================== */
+#endScreen {
+    position: absolute;
+    inset: 0;
+    display: none;
+    z-index: 30;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #0d0f0d;
+    font-family: 'Press Start 2P', monospace;
+    overflow: hidden;
+
+    --green: #4caf50;
+    --green-dim: #2e7d32;
+    --star: rgba(255,255,255,0.7);
+    --line: rgba(76,175,80,0.35);
+}
+
+/* Starfield Estrelas */
+.stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: var(--star);
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to   { opacity: 1; }
+}
+
+/* Painel da Moldura CRT */
+.panel {
+    position: relative;
+    z-index: 1;
+    width: min(760px, 92vw);
+    padding: 2.5rem 3rem 3rem;
+    background: rgba(5, 10, 5, 0.9);
+    border: 2px solid var(--green-dim);
+    box-shadow: 0 0 30px rgba(76,175,80,0.15), inset 0 0 60px rgba(0,0,0,0.6);
+    margin-top: 50px; /* Adiciona espaço acima do painel para o título flutuar sem cortar */
+}
+
+
+.title {
+    position: absolute;
+    top: -55px; 
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    
+    font-size: 28px; 
+    letter-spacing: 0.25em;
+    text-indent: 0.25em; 
+    
+    margin-bottom: 0;
+    display: block;
+    animation: blink-title 1.4s steps(1) infinite;
+}
+
+#endTitle.win {
+    color: var(--green);
+    text-shadow: 0 0 12px var(--green);
+}
+
+#endTitle.lose {
+    color: #ff2a2a;
+    text-shadow: 0 0 12px #ff2a2a;
+    -webkit-text-stroke: unset;
+}
+
+@keyframes blink-title {
+    0%, 49%   { opacity: 1; }
+    50%, 100% { opacity: 0.65; }
+}
+
+/* Filas de Score */
+.score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: clamp(0.65rem, 2vw, 0.85rem);
+    letter-spacing: 0.12em;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 1.2rem;
+}
+
+.score-row .label { color: var(--green); }
+.score-row .value {
+    color: var(--green);
+    text-shadow: 0 0 8px var(--green);
+}
+
+/* Estatísticas */
+.sub-section {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(0.5rem, 1.5vw, 0.65rem);
+    letter-spacing: 0.1em;
+    line-height: 2.2;
+    color: var(--green);
+}
+
+.stat-row .value { opacity: 0.9; }
+
+/* Botão de Saída (QUIT) */
+.quit-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+#playAgainBtn.quit-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+    letter-spacing: 0.15em;
+    color: var(--green);
+    background: transparent;
+    border: 2px solid var(--green);
+    padding: 0.7em 1.4em;
+    cursor: pointer;
+    text-shadow: 0 0 6px var(--green);
+    box-shadow: 0 0 10px rgba(76,175,80,0.3), inset 0 0 10px rgba(76,175,80,0.05);
+    transition: background 0.15s, box-shadow 0.15s, color 0.15s, transform 0.1s;
+    width: auto;
+    height: auto;
+}
+
+#playAgainBtn.quit-btn:hover {
+    background: var(--green);
+    color: #0d0f0d;
+    text-shadow: none;
+    box-shadow: 0 0 20px rgba(76,175,80,0.7);
+}
+
+#playAgainBtn.quit-btn:active {
+    transform: scale(0.96);
+}
+
+/* Linhas de Varredura CRT Scanline */
+#endScreen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0,0,0,0.22) 2px,
+        rgba(0,0,0,0.22) 4px
+    );
+    pointer-events: none;
+    z-index: 99;
+}
